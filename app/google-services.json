@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "278688681984",
+    "project_id": "littlelemonbackend",
+    "storage_bucket": "littlelemonbackend.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278688681984:android:dea7ef028496878e1a48e5",
+        "android_client_info": {
+          "package_name": "com.example.littlelemon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278688681984-acdpjanhipba07ass4vkeliboonoqqcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.littlelemon",
+            "certificate_hash": "a785a1edddf1aae544e6d09c778468c6787be3ff"
+          }
+        },
+        {
+          "client_id": "278688681984-01q6h7nqt9vtcuc3gl23ulsmn519hafj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx5LYrvXfz5cC7qdkrI5XjHeucgq5M410"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278688681984-01q6h7nqt9vtcuc3gl23ulsmn519hafj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

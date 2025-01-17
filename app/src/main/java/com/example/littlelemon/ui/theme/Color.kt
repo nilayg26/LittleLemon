@@ -1,11 +1,15 @@
 package com.example.littlelemon.ui.theme
 
 import androidx.compose.ui.graphics.Color
-
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Primary =Colors.Primary
+val Secondary=Colors.Secondary
+val Tertiary=Colors.Tertiary
+object Colors{
+    val Primary=Color(0xFF495E57)
+    val Secondary=Color(0xFFF4CE14)
+    val Tertiary=Color(0xFFEE9972)
+    val O1=Color(0xFFFBDABB)
+    val O2=Color(0xFFEDEFEE) // For highlight
+    val O3=Color(0xFF333333)// For highlight
+    val O4=Color.White
+}
