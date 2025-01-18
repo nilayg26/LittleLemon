@@ -21,7 +21,6 @@ import com.example.littlelemon.pages.ProfilePage
 import com.example.littlelemon.pages.SignUp
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.LittleLemonTheme
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
