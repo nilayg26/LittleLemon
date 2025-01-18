@@ -61,16 +61,4 @@ object DataRetrievedFromRoom:State{
 object DataError:State{
     override var value: String="Error"
 }
-interface SortBy{
-    var type:String
-}
-object Mains:SortBy{
-    override var type="mains"
-}
-object Desserts:SortBy{
-    override var type="desserts"
-}
-object Starters:SortBy{
-    override var type="starters"
-}
 

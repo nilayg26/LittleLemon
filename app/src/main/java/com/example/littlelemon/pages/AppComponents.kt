@@ -121,9 +121,6 @@ fun ItemCard(
     picUrl: String = "",
     price: String
 ){
-    var isLoading by remember {
-        mutableStateOf(true)
-    }
     Spacer(modifier = Modifier.height(10.dp))
     Card(modifier = Modifier
         .padding(start = 10.dp, end = 10.dp)
@@ -135,7 +132,7 @@ fun ItemCard(
         )
         Row(modifier = Modifier.fillMaxWidth(), Arrangement.SpaceBetween,Alignment.CenterVertically) {
             Box(modifier = Modifier.width(200.dp)){
-                TextLL(text = des, color = Colors.Primary, size = 12)
+                TextLL(text = checkString(des), color = Colors.Primary, size = 12)
             }
             Box(modifier = Modifier
                 .padding(10.dp)

@@ -90,7 +90,7 @@ fun HomePage(
             }
     }
     LaunchedEffect(Unit){
-        if(dataState.value!=DataRetrieved) {
+        if(dataState.value!=DataRetrieved&&dataState.value!=DataRetrievedFromRoom) {
             dataViewModel.loadData()
         }
     }
