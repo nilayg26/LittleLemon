@@ -30,7 +30,6 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences=this.getSharedPreferences("LittleLemon",Context.MODE_PRIVATE)
         setContent {
             LittleLemonTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Colors.O2
