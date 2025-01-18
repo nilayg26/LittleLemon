@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id ("kotlin-kapt")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -51,7 +53,15 @@ android {
     }
 }
 
+
 dependencies {
+    kapt("androidx.room:room-compiler:2.6.1") // Use kapt for Kotlin
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation ("io.ktor:ktor-client-android:2.1.3")
+    implementation ("io.ktor:ktor-client-content-negotiation:2.1.3")
+    implementation ("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")

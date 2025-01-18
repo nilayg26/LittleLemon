@@ -28,21 +28,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.littlelemon.AuthViewModel
+import com.example.littlelemon.ViewModels.AuthViewModel
 import com.example.littlelemon.Authenticated
 import com.example.littlelemon.Error
 import com.example.littlelemon.HomePage
 import com.example.littlelemon.Loading
-import com.example.littlelemon.LoadingScreenLL
-import com.example.littlelemon.LogoButtonLL
+import com.example.littlelemon.LogInPage
 import com.example.littlelemon.R
 import com.example.littlelemon.SignInPage
-import com.example.littlelemon.TextCardLL
-import com.example.littlelemon.TextFieldLL
 import com.example.littlelemon.createToastMessage
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.Fonts
-import com.example.littlelemon.check
 import kotlinx.coroutines.launch
 @Composable
 fun LogIn(
@@ -67,7 +63,7 @@ fun LogIn(
     val authState=authViewModel.authState.observeAsState()
     LaunchedEffect(authState.value){
         Log.d(null, authState.value?.value.toString()+" From Launched Effect")
-        if(!check(listOf(email,pass))||isGoogle) {
+        if(!check(listOf(email,pass)) ||isGoogle) {
             when (authState.value) {
                 is Authenticated -> {
                     val user=authViewModel.getUser()
@@ -81,7 +77,12 @@ fun LogIn(
                             putString("pic",pic)
                         .apply()
                     println(sharedPreferences.getString("name",null)+e+pic)
-                    navController.navigate(HomePage.route)
+                    navController.navigate(HomePage.route){
+                        popUpTo(LogInPage.route){
+                            inclusive=true
+                        }
+                    }
+
                 }
                 is Loading-> isLoading=true
                 is Error -> {context.createToastMessage("Credentials not found"); isLoading=false}

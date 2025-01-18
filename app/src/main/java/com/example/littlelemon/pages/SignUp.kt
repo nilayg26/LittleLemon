@@ -13,32 +13,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.littlelemon.ui.theme.Colors
-import com.example.littlelemon.ui.theme.Fonts
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.littlelemon.AuthViewModel
+import com.example.littlelemon.ViewModels.AuthViewModel
+import com.example.littlelemon.Authenticated
 import com.example.littlelemon.Error
 import com.example.littlelemon.HomePage
-import com.example.littlelemon.check
-import com.example.littlelemon.LogoButtonLL
-import com.example.littlelemon.R
-import com.example.littlelemon.TextFieldLL
-import com.example.littlelemon.createToastMessage
-import com.example.littlelemon.Authenticated
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import com.example.littlelemon.Loading
-import com.example.littlelemon.LoadingScreenLL
-import com.example.littlelemon.TextCardLL
+import com.example.littlelemon.R
+import com.example.littlelemon.createToastMessage
+import com.example.littlelemon.ui.theme.Colors
+import com.example.littlelemon.ui.theme.Fonts
 import kotlinx.coroutines.launch
 
 @Composable
@@ -69,7 +64,7 @@ fun SignUp(
     }
     val authState = authViewModel.authState.observeAsState()
     LaunchedEffect(authState.value){
-        if(!check(listOf(email,pass,cPass))||isGoogle) {
+        if(!check(listOf(email,pass,cPass)) ||isGoogle) {
             when (authState.value) {
                 is Error -> {context.createToastMessage((authState.value as Error).msg); isLoading=false}
                 is Loading->isLoading=true
@@ -92,7 +87,7 @@ fun SignUp(
     }
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         LogoButtonLL()
-        TextCardLL(text = "Lets Get to know you !")
+        TextCardLL(text = "Lets Connect !")
         TextFieldLL(text = name,label="Enter name"){
             name=it
             name

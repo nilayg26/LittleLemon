@@ -1,6 +1,5 @@
 package com.example.littlelemon
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,8 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.littlelemon.ViewModels.AuthViewModel
+import com.example.littlelemon.ViewModels.KtorViewModel
 import com.example.littlelemon.pages.HomePage
 import com.example.littlelemon.pages.LogIn
+import com.example.littlelemon.pages.ProfilePage
 import com.example.littlelemon.pages.SignUp
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.LittleLemonTheme
@@ -23,7 +25,8 @@ import com.example.littlelemon.ui.theme.LittleLemonTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val authViewModel:AuthViewModel by viewModels()
+        val authViewModel: AuthViewModel by viewModels()
+        val dataViewModel= KtorViewModel(context = this)
         val sharedPreferences=this.getSharedPreferences("LittleLemon",Context.MODE_PRIVATE)
         setContent {
             LittleLemonTheme {
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Colors.O2
                 ) {
-                    Navigation(authViewModel,sharedPreferences)
+                    Navigation(authViewModel,sharedPreferences,dataViewModel)
                 }
             }
         }
@@ -40,7 +43,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Navigation(authViewModel: AuthViewModel, sharedPreferences: SharedPreferences){
+fun Navigation(
+    authViewModel: AuthViewModel,
+    sharedPreferences: SharedPreferences,
+    dataViewModel: KtorViewModel
+){
     val navController= rememberNavController()
     val status= sharedPreferences.getBoolean("LoginStatus",false)
     NavHost(navController = navController, startDestination = when(status){
@@ -54,10 +61,10 @@ fun Navigation(authViewModel: AuthViewModel, sharedPreferences: SharedPreference
             SignUp(navController=navController,authViewModel,sharedPreferences)
         }
         composable(HomePage.route) {
-            HomePage(navController,authViewModel,sharedPreferences)
+            HomePage(navController,authViewModel,sharedPreferences,dataViewModel)
         }
         composable(ProfilePage.route) {
-          //  ProfilePage(navController,authViewModel,sharedPreferences)
+            ProfilePage(navController,authViewModel,sharedPreferences)
         }
     }
 }
