@@ -79,7 +79,7 @@ fun SignUp(
                     val user=authViewModel.getUser()
                     val pic=user?.email.toString()
                     val uid=user?.uid
-                    sharedPreferences.edit().putString("Unique",uid).apply()
+                    sharedPreferences.edit().putString("uid",uid).apply()
                     sharedPreferences.edit().putString("pic",pic).apply()
                     firebaseDataBaseViewModel.addUser(user = User(uid=uid.toString(),name=name))
                 }
