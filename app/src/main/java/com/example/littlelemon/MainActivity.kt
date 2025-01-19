@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.littlelemon.ViewModels.AuthViewModel
+import com.example.littlelemon.ViewModels.FirebaseDataBaseViewModel
 import com.example.littlelemon.ViewModels.KtorViewModel
 import com.example.littlelemon.pages.HomePage
 import com.example.littlelemon.pages.LogIn
@@ -27,13 +28,14 @@ class MainActivity : ComponentActivity() {
         val authViewModel: AuthViewModel by viewModels()
         val dataViewModel= KtorViewModel(context = this)
         val sharedPreferences=this.getSharedPreferences("LittleLemon",Context.MODE_PRIVATE)
+        val firebaseDataBaseViewModel:FirebaseDataBaseViewModel by viewModels()
         setContent {
             LittleLemonTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Colors.O2
                 ) {
-                    Navigation(authViewModel,sharedPreferences,dataViewModel)
+                    Navigation(authViewModel,sharedPreferences,dataViewModel,firebaseDataBaseViewModel)
                 }
             }
         }
@@ -44,7 +46,8 @@ class MainActivity : ComponentActivity() {
 fun Navigation(
     authViewModel: AuthViewModel,
     sharedPreferences: SharedPreferences,
-    dataViewModel: KtorViewModel
+    dataViewModel: KtorViewModel,
+    firebaseDataBaseViewModel: FirebaseDataBaseViewModel
 ){
     val navController= rememberNavController()
     val status= sharedPreferences.getBoolean("LoginStatus",false)
@@ -53,16 +56,16 @@ fun Navigation(
             else->LogInPage.route
     }){
         composable(LogInPage.route) {
-            LogIn(navController = navController,authViewModel,sharedPreferences)
+            LogIn(navController = navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
         composable(SignInPage.route){
-            SignUp(navController=navController,authViewModel,sharedPreferences)
+            SignUp(navController=navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
         composable(HomePage.route) {
-            HomePage(navController,authViewModel,sharedPreferences,dataViewModel)
+            HomePage(navController,sharedPreferences,dataViewModel)
         }
         composable(ProfilePage.route) {
-            ProfilePage(navController,authViewModel,sharedPreferences)
+            ProfilePage(navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
     }
 }

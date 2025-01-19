@@ -37,7 +37,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -50,16 +49,15 @@ import com.example.littlelemon.MenuList
 import com.example.littlelemon.ViewModels.KtorViewModel
 import com.example.littlelemon.ProfilePage
 import com.example.littlelemon.R
+import com.example.littlelemon.ViewModels.FirebaseDataBaseViewModel
 import com.example.littlelemon.createToastMessage
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.Fonts
 import com.example.littlelemon.ui.theme.LittleLemonTheme
-import java.util.Locale
 
 @Composable
 fun HomePage(
     navController: NavHostController,
-    authViewModel: AuthViewModel,
     sharedPreferences: SharedPreferences,
     dataViewModel: KtorViewModel
 ) {

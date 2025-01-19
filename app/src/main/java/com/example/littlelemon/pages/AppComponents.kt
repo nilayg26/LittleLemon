@@ -157,7 +157,6 @@ fun IconButtonLL(sharedPreferences: SharedPreferences, onClick:()->(Unit)={},siz
     IconButton(modifier = Modifier.size(size.dp),onClick = onClick, colors = IconButtonDefaults.iconButtonColors(containerColor = Colors.Primary)) {
         val picUrl=sharedPreferences.getString("pic","")
         GlideImage(model =picUrl, contentDescription ="profile pic" ,
-         //   loading = placeholder(R.drawable.default_pic),
             failure = placeholder(R.drawable.default_pic),
             contentScale = ContentScale.Crop
         )
@@ -166,7 +165,7 @@ fun IconButtonLL(sharedPreferences: SharedPreferences, onClick:()->(Unit)={},siz
 fun checkString(str:String):String{
     return when(str.length){
         in 1 until 80 -> str
-        else -> str.substring(1,78)+"..."
+        else -> str.substring(0,78)+"..."
     }
 }
 

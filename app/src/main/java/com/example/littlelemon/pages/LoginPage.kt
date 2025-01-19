@@ -36,6 +36,7 @@ import com.example.littlelemon.Loading
 import com.example.littlelemon.LogInPage
 import com.example.littlelemon.R
 import com.example.littlelemon.SignInPage
+import com.example.littlelemon.ViewModels.FirebaseDataBaseViewModel
 import com.example.littlelemon.createToastMessage
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.Fonts
@@ -44,7 +45,8 @@ import kotlinx.coroutines.launch
 fun LogIn(
     navController: NavHostController,
     authViewModel: AuthViewModel,
-    sharedPreferences: SharedPreferences
+    sharedPreferences: SharedPreferences,
+    firebaseDataBaseViewModel: FirebaseDataBaseViewModel
 ) {
     val context= LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -70,19 +72,20 @@ fun LogIn(
                     val name= user?.displayName.toString()
                     val e=user?.email.toString()
                     val pic=user?.photoUrl.toString()
+                    val uid=user?.uid.toString()
+                    firebaseDataBaseViewModel.checkUser(uid, name)
                     sharedPreferences.edit().
                             putBoolean("LoginStatus",true).
                             putString("name",name).
                             putString("email",e).
-                            putString("pic",pic)
+                            putString("pic",pic).
+                            putString("uid",uid)
                         .apply()
-                    println(sharedPreferences.getString("name",null)+e+pic)
                     navController.navigate(HomePage.route){
                         popUpTo(LogInPage.route){
                             inclusive=true
                         }
                     }
-
                 }
                 is Loading-> isLoading=true
                 is Error -> {context.createToastMessage("Credentials not found"); isLoading=false}

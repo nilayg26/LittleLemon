@@ -55,6 +55,8 @@ android {
 
 
 dependencies {
+    implementation("com.google.firebase:firebase-firestore:25.1.1")
+    implementation("com.google.firebase:firebase-auth:23.1.0")
     kapt("androidx.room:room-compiler:2.6.1") // Use kapt for Kotlin
     implementation ("androidx.room:room-runtime:2.6.1")
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
@@ -79,7 +81,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("com.google.firebase:firebase-auth:23.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")

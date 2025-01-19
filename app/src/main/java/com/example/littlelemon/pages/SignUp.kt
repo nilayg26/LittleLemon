@@ -28,9 +28,14 @@ import androidx.navigation.NavHostController
 import com.example.littlelemon.ViewModels.AuthViewModel
 import com.example.littlelemon.Authenticated
 import com.example.littlelemon.Error
+import com.example.littlelemon.FireBaseDataError
+import com.example.littlelemon.FireBaseDataLoading
+import com.example.littlelemon.FireBaseDataUploaded
 import com.example.littlelemon.HomePage
 import com.example.littlelemon.Loading
 import com.example.littlelemon.R
+import com.example.littlelemon.ViewModels.FirebaseDataBaseViewModel
+import com.example.littlelemon.ViewModels.User
 import com.example.littlelemon.createToastMessage
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.Fonts
@@ -40,7 +45,8 @@ import kotlinx.coroutines.launch
 fun SignUp(
     navController: NavHostController,
     authViewModel: AuthViewModel,
-    sharedPreferences: SharedPreferences
+    sharedPreferences: SharedPreferences,
+    firebaseDataBaseViewModel: FirebaseDataBaseViewModel
 ) {
     val context= LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -63,6 +69,7 @@ fun SignUp(
         mutableStateOf(false)
     }
     val authState = authViewModel.authState.observeAsState()
+    val fDbState=firebaseDataBaseViewModel.getLiveState().observeAsState()
     LaunchedEffect(authState.value){
         if(!check(listOf(email,pass,cPass)) ||isGoogle) {
             when (authState.value) {
@@ -70,19 +77,33 @@ fun SignUp(
                 is Loading->isLoading=true
                 is Authenticated ->{
                     val user=authViewModel.getUser()
-                    val n= user?.displayName?:name
-                    val e=user?.email.toString()
-                    val pic=user?.photoUrl.toString()
-                    sharedPreferences.edit().
-                    putBoolean("LoginStatus",true).
-                    putString("name",n).
-                    putString("email",e).
-                    putString("pic",pic)
-                        .apply()
-                    navController.navigate(HomePage.route)
+                    val pic=user?.email.toString()
+                    val uid=user?.uid
+                    sharedPreferences.edit().putString("Unique",uid).apply()
+                    sharedPreferences.edit().putString("pic",pic).apply()
+                    firebaseDataBaseViewModel.addUser(user = User(uid=uid.toString(),name=name))
                 }
                 else -> isLoading=false
             }
+        }
+    }
+    LaunchedEffect(fDbState.value){
+        when(fDbState.value){
+            FireBaseDataUploaded ->{
+                sharedPreferences.edit().
+                putBoolean("LoginStatus",true).
+                putString("name",name).
+                putString("email",email)
+                    .apply()
+                navController.navigate(HomePage.route)
+            }
+            FireBaseDataLoading->{
+                isLoading=true
+            }
+            FireBaseDataError->{
+                println("Error: ${FireBaseDataError.errMessage}")
+            }
+            else->{isLoading=false}
         }
     }
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {

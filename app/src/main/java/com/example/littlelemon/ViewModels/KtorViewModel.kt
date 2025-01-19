@@ -57,9 +57,6 @@ class KtorViewModel(context: Context):ViewModel(){
            _dataState.value= DataError
        }
     }
-    fun getData(): MenuList {
-        return menuList.value?: MenuList(listOf(Dish(1,"-None-","-None-","0","","")))
-    }
     fun getLiveData():LiveData<MenuList>{
         return menuList
     }

@@ -61,4 +61,16 @@ object DataRetrievedFromRoom:State{
 object DataError:State{
     override var value: String="Error"
 }
-
+object FireBaseDataUploaded:State{
+    override var value="Data Uploaded"
+}
+object FireBaseDataError:State{
+    override var value="Data Error"
+    var errMessage=""
+}
+object FireBaseDataRetrieved:State{
+    override var value="Data Retrieved"
+}
+object FireBaseDataLoading:State{
+    override var value="Data loading"
+}
