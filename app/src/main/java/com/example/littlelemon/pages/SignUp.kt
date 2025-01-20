@@ -109,11 +109,11 @@ fun SignUp(
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         LogoButtonLL()
         TextCardLL(text = "Lets Connect !")
-        TextFieldLL(text = name,label="Enter name"){
+        TextFieldLL(text = name,label="Enter name", password = false){
             name=it
             name
         }
-        TextFieldLL(text = email,label="Enter Email"){
+        TextFieldLL(text = email,label="Enter Email", password = false){
             email=it
             email
         }
@@ -133,7 +133,7 @@ fun SignUp(
                     cPass
                 )
             )
-        ){context.createToastMessage("Fields Cannot be empty")}
+        ){context.createToastMessage("Invalid Credentials")}
         else{
             authViewModel.signUp(email,pass)
         }}, colors = ButtonDefaults.buttonColors(containerColor = Colors.O4, contentColor = Colors.Primary)) {

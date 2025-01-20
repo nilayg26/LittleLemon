@@ -98,7 +98,7 @@ fun LogIn(
     ) {
         LogoButtonLL()
         TextCardLL(text = "Lets Get you in !")
-        TextFieldLL(text = email,label="Enter email"){
+        TextFieldLL(text = email,label="Enter email", password = false){
             email=it
             email
         }

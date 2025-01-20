@@ -16,6 +16,7 @@ import com.example.littlelemon.R
 import com.example.littlelemon.State
 import com.example.littlelemon.Unauthenticated
 import com.example.littlelemon.createToastMessage
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.FirebaseAuth
@@ -112,7 +113,7 @@ class AuthViewModel: ViewModel() {
                                 _authState.value =
                                     Error(task.exception?.message ?: "Something went wrong")
                             }
-                        }.await()
+                        }
                     } else {
                         context.createToastMessage("Try Again!")
                     }
@@ -120,10 +121,10 @@ class AuthViewModel: ViewModel() {
 
                 else -> {}
             }
-
         } catch (e: Exception) {
             _authState.value= Unauthenticated
             context.createToastMessage("Could not get to your Google Account")
+            println("Heyyyy Errrooor: "+e.message.toString())
             e.message?.let { Log.d("error", it) }
         }
     }

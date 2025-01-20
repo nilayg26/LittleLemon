@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,9 @@ fun ProfilePage(
     sharedPreferences: SharedPreferences,
     firebaseDataBaseViewModel: FirebaseDataBaseViewModel
 ) {
+    val name by remember {
+        mutableStateOf(sharedPreferences.getString("name","null"))
+    }
     val email by remember {
         mutableStateOf(sharedPreferences.getString("email", null))
     }
@@ -36,7 +40,10 @@ fun ProfilePage(
     val fDbState = firebaseDataBaseViewModel.getLiveState().observeAsState()
     val nameFb = firebaseDataBaseViewModel.getLiveName().observeAsState()
     LaunchedEffect(fDbState.value) {
-        if (nameFb.value ==null) {
+        if (name.toString()!="null"){
+            firebaseDataBaseViewModel.setNameValue(name.toString())
+        }
+        if (name.toString()=="null" &&nameFb.value==null) {
             firebaseDataBaseViewModel.getUser(uid!!)
         }
     }
@@ -47,7 +54,7 @@ fun ProfilePage(
             Spacer(Modifier.height(50.dp))
             IconButtonLL(sharedPreferences, size = 100)
             Spacer(Modifier.height(20.dp))
-            TextFieldLL(
+            TextFieldLL(password = false,
                 text = if (nameFb.value.toString() == "null") {
                     "Loading..."
                 }; else {
@@ -57,7 +64,7 @@ fun ProfilePage(
                 }, label = "Name"
             )
             Spacer(Modifier.height(20.dp))
-            TextFieldLL(text = email.toString(), lamda = {
+            TextFieldLL(password = false,text = email.toString(), lamda = {
                 it
             }, label = "Email")
             Spacer(Modifier.height(100.dp))

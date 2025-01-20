@@ -20,6 +20,9 @@ class FirebaseDataBaseViewModel:ViewModel() {
     fun getLiveName(): MutableLiveData<String?> {
         return name
     }
+    fun setNameValue(str:String){
+        name.value=str
+    }
     fun addUser(user: User) {
         fDatabaseState.value = FireBaseDataLoading
         try {
@@ -69,7 +72,6 @@ class FirebaseDataBaseViewModel:ViewModel() {
                 if (task.result.exists()) {
                     val snapshot = task.result
                     name.value= snapshot.data?.get("name").toString()
-                    println("Nameee isss this::"+name.value)
                 } else {
                     println("From getUser(): User does not exists")
                 }

@@ -98,7 +98,7 @@ fun HomePage(
     var search by remember {
         mutableStateOf("")
     }
-    val list:List<String> = listOf("Starters","Mains","Desserts","Drinks")
+    val list:List<String> = listOf("All","Starters","Mains","Desserts","Drinks")
     LittleLemonTheme {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
             Spacer(modifier = Modifier.height(10.dp))
@@ -137,10 +137,10 @@ fun HomePage(
                         )
                     }
                 }
-                Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center) {
-                    TextField(value = search, onValueChange ={newVal->search = newVal}, label = { Text(text = "Type to Search🔎")}, shape = RoundedCornerShape(20.dp))
-                }
-                Spacer(modifier = Modifier.height(25.dp))
+//                Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center) {
+//                    TextField(value = search, onValueChange ={newVal->search = newVal}, label = { Text(text = "Type to Search🔎")}, shape = RoundedCornerShape(20.dp))
+//                }
+                Spacer(modifier = Modifier.height(15.dp))
             }
             Spacer(modifier = Modifier.height(15.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
@@ -199,7 +199,17 @@ fun FilterData(menuList: State<MenuList?>,search:String,category: String){
         }
     }
     else {
-        if (category.isNotEmpty())
+        if (category=="All"){
+            menuList.value?.menu?.forEach { dish ->
+                ItemCard(
+                    price = dish.price,
+                    dishName = dish.title,
+                    des = dish.description,
+                    picUrl = dish.image
+                )
+            }
+        }
+        else if (category.isNotEmpty())
             menuList.value?.menu?.filter {
                 category.equals(it.category, true)
             }?.forEach { dish ->
