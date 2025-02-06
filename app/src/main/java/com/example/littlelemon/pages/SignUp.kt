@@ -1,6 +1,7 @@
 package com.example.littlelemon.pages
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,13 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.littlelemon.ViewModels.AuthViewModel
-import com.example.littlelemon.Authenticated
+import com.example.littlelemon.EmailNotVerified
 import com.example.littlelemon.Error
 import com.example.littlelemon.FireBaseDataError
 import com.example.littlelemon.FireBaseDataLoading
 import com.example.littlelemon.FireBaseDataUploaded
 import com.example.littlelemon.HomePage
 import com.example.littlelemon.Loading
+import com.example.littlelemon.LogInPage
 import com.example.littlelemon.R
 import com.example.littlelemon.ViewModels.FirebaseDataBaseViewModel
 import com.example.littlelemon.ViewModels.User
@@ -75,14 +77,18 @@ fun SignUp(
             when (authState.value) {
                 is Error -> {context.createToastMessage((authState.value as Error).msg); isLoading=false}
                 is Loading->isLoading=true
-                is Authenticated ->{
+                is EmailNotVerified->{
                     val user=authViewModel.getUser()
                     val pic=user?.email.toString()
                     val uid=user?.uid
                     sharedPreferences.edit().putString("uid",uid).apply()
                     sharedPreferences.edit().putString("pic",pic).apply()
                     firebaseDataBaseViewModel.addUser(user = User(uid=uid.toString(),name=name))
-                }
+                    navController.navigate(LogInPage.route){
+                    popUpTo(LogInPage.route){
+                        inclusive=true
+                    }
+                }}
                 else -> isLoading=false
             }
         }
@@ -126,7 +132,7 @@ fun SignUp(
             cPass
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = {if(check(
+        Button(modifier = Modifier.animateContentSize(), onClick = {if(check(
                 listOf(
                     name,
                     pass,
@@ -135,7 +141,7 @@ fun SignUp(
             )
         ){context.createToastMessage("Invalid Credentials")}
         else{
-            authViewModel.signUp(email,pass)
+            authViewModel.signUp(email,pass,context)
         }}, colors = ButtonDefaults.buttonColors(containerColor = Colors.O4, contentColor = Colors.Primary)) {
             if (!isLoading) {
                 Text(text = "Go! ", fontFamily = Fonts.paragraph, fontSize = 18.sp)

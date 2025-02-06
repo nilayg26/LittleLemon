@@ -1,11 +1,12 @@
 package com.example.littlelemon
-
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import com.example.littlelemon.pages.ProfilePage
 import com.example.littlelemon.pages.SignUp
 import com.example.littlelemon.ui.theme.Colors
 import com.example.littlelemon.ui.theme.LittleLemonTheme
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,16 +57,16 @@ fun Navigation(
             true->HomePage.route
             else->LogInPage.route
     }){
-        composable(LogInPage.route) {
+        composable(LogInPage.route,enterTransition = { scaleIn() }, exitTransition = {  scaleOut() }) {
             LogIn(navController = navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
-        composable(SignInPage.route){
+        composable(SignInPage.route, enterTransition = { scaleIn() }, exitTransition = { scaleOut() }){
             SignUp(navController=navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
-        composable(HomePage.route) {
+        composable(HomePage.route, enterTransition = { scaleIn() }, exitTransition = { scaleOut() }) {
             HomePage(navController,sharedPreferences,dataViewModel)
         }
-        composable(ProfilePage.route) {
+        composable(ProfilePage.route, enterTransition = { scaleIn() }, exitTransition = { scaleOut() }) {
             ProfilePage(navController,authViewModel,sharedPreferences,firebaseDataBaseViewModel)
         }
     }

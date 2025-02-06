@@ -46,6 +46,9 @@ object Authenticated:State{
 object Unauthenticated:State{
     override var value="unauthen"
 }
+object EmailNotVerified:State{
+    override var value="emailnotverified"
+}
 data class Error(val msg:String):State{
     override var value="Error"
 }

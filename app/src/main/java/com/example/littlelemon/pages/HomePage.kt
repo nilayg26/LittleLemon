@@ -1,6 +1,9 @@
 package com.example.littlelemon.pages
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -137,9 +140,6 @@ fun HomePage(
                         )
                     }
                 }
-//                Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center) {
-//                    TextField(value = search, onValueChange ={newVal->search = newVal}, label = { Text(text = "Type to Search🔎")}, shape = RoundedCornerShape(20.dp))
-//                }
                 Spacer(modifier = Modifier.height(15.dp))
             }
             Spacer(modifier = Modifier.height(15.dp))
@@ -163,20 +163,31 @@ fun HomePage(
                     Spacer(modifier = Modifier.width(10.dp))
                 }
             }
-            Column(modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(verticalScrollState), horizontalAlignment = Alignment.CenterHorizontally) {
-                when (dataState.value) {
-                    DataRetrieved, DataRetrievedFromRoom -> {
-                        FilterData(menuList = menuList, search = search, category = category)
-                    }
-                    DataIsLoading -> {
-                        Spacer(modifier = Modifier.height(10.dp))
-                        LoadingScreenLL(45)
-                    }
-                    else -> {
-                        Spacer(modifier = Modifier.height(20.dp))
-                        TextLL("Error Loading Content\nCheck Internet and Restart the App", color = Colors.O3)
+            AnimatedContent(targetState = category) {
+                targetValue->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(verticalScrollState),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    when (dataState.value) {
+                        DataRetrieved, DataRetrievedFromRoom -> {
+                            FilterData(menuList = menuList, search = search, targetValue = targetValue)
+                        }
+
+                        DataIsLoading -> {
+                            Spacer(modifier = Modifier.height(10.dp))
+                            LoadingScreenLL(45)
+                        }
+
+                        else -> {
+                            Spacer(modifier = Modifier.height(20.dp))
+                            TextLL(
+                                "Error Loading Content\nCheck Internet and Restart the App",
+                                color = Colors.O3
+                            )
+                        }
                     }
                 }
             }
@@ -184,22 +195,10 @@ fun HomePage(
         }
     }
 }
+@SuppressLint("UnusedContentLambdaTargetStateParameter")
 @Composable
-fun FilterData(menuList: State<MenuList?>,search:String,category: String){
-    if (search.isNotEmpty()){
-        menuList.value?.menu?.filter {
-            it.title.contains(search, true)
-        }?.forEach { dish ->
-            ItemCard(
-                price = dish.price,
-                dishName = dish.title,
-                des = dish.description,
-                picUrl = dish.image
-            )
-        }
-    }
-    else {
-        if (category=="All"){
+fun FilterData(menuList: State<MenuList?>,targetValue:String,search:String){
+        if (targetValue=="All"){
             menuList.value?.menu?.forEach { dish ->
                 ItemCard(
                     price = dish.price,
@@ -209,9 +208,9 @@ fun FilterData(menuList: State<MenuList?>,search:String,category: String){
                 )
             }
         }
-        else if (category.isNotEmpty())
+        else if (targetValue.isNotEmpty())
             menuList.value?.menu?.filter {
-                category.equals(it.category, true)
+                targetValue.equals(it.category, true)
             }?.forEach { dish ->
                 ItemCard(
                     price = dish.price,
@@ -230,6 +229,7 @@ fun FilterData(menuList: State<MenuList?>,search:String,category: String){
                 )
             }
         }
-    }
+
+
 }
 

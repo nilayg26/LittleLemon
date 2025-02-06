@@ -2,7 +2,6 @@ package com.example.littlelemon.ViewModels
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -10,19 +9,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.littlelemon.Authenticated
+import com.example.littlelemon.EmailNotVerified
 import com.example.littlelemon.Error
 import com.example.littlelemon.Loading
 import com.example.littlelemon.R
 import com.example.littlelemon.State
 import com.example.littlelemon.Unauthenticated
 import com.example.littlelemon.createToastMessage
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.tasks.await
 
 class AuthViewModel: ViewModel() {
     private val auth: FirebaseAuth =FirebaseAuth.getInstance()
@@ -40,12 +38,18 @@ class AuthViewModel: ViewModel() {
             println(auth.currentUser.toString())
         }
     }
-    fun login(email:String, pass:String,isGoogle: Boolean=false){
+    fun login(email:String, pass:String,isGoogle: Boolean=false,context: Context){
         _authState.value= Loading
         if(!isGoogle) {
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        _authState.value = Authenticated
+                        if (auth.currentUser?.isEmailVerified==true) {
+                            _authState.value = Authenticated
+                        }
+                        else{
+                            context.createToastMessage("Check your inbox to verify")
+                            _authState.value=EmailNotVerified
+                        }
                     } else {
                         try {
                             _authState.value =
@@ -57,14 +61,19 @@ class AuthViewModel: ViewModel() {
                 }
         }
     }
-    fun signUp(email: String,pass: String,isGoogle: Boolean=false){
+    fun signUp(email: String, pass: String, context: Context,isGoogle: Boolean=false){
         _authState.value= Loading
         if (!isGoogle) {
 
             auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _authState.value = Authenticated
-                    println(authState.value?.value)
+                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener {
+                        task->
+                        if (task.isSuccessful){
+                            context.createToastMessage("Check your inbox to verify")
+                            _authState.value = EmailNotVerified
+                        }
+                    }
                 }
                 else {
                     _authState.value = Error(task.exception?.message ?: "Something went wrong")
@@ -107,8 +116,6 @@ class AuthViewModel: ViewModel() {
                         auth.signInWithCredential(authCredential).addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                  _authState.value = Authenticated
-                                Log.d(null, "Was reached here!")
-
                             } else {
                                 _authState.value =
                                     Error(task.exception?.message ?: "Something went wrong")
@@ -124,8 +131,7 @@ class AuthViewModel: ViewModel() {
         } catch (e: Exception) {
             _authState.value= Unauthenticated
             context.createToastMessage("Could not get to your Google Account")
-            println("Heyyyy Errrooor: "+e.message.toString())
-            e.message?.let { Log.d("error", it) }
+            println("Error from log in: "+e.message.toString())
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.littlelemon.pages
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -107,7 +108,7 @@ fun LogIn(
             pass
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = {if(check(
+        Button(modifier = Modifier.animateContentSize(),onClick = {if(check(
                 listOf(
                     email,
                     pass
@@ -115,7 +116,7 @@ fun LogIn(
             )
         ){context.createToastMessage("Fields cannot be empty")}
         else{
-            authViewModel.login(email, pass)
+            authViewModel.login(email, pass, context = context)
         }}, colors = ButtonDefaults.buttonColors(containerColor = Colors.O4, contentColor = Colors.Primary)) {
             if (!isLoading) {
                 Text(text = "Go! ", fontFamily = Fonts.paragraph, fontSize = 18.sp)
@@ -129,7 +130,7 @@ fun LogIn(
         Spacer(modifier = Modifier.height(20.dp))
         Button(onClick = {
             isGoogle=true
-            authViewModel.setAuthState(Loading);
+            authViewModel.setAuthState(Loading)
             println(authViewModel.authState.value?.value)
                          coroutineScope.launch {
                              authViewModel.googleLogIn(context = context)
