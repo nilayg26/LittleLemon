@@ -2,9 +2,14 @@
 Capstone Project for [Meta](https://github.com/facebook) Android Developer Professional Certificate
 
 # 📸 Some Screen shots
-| Login | SignUp | Home Page 1 | Home Page 2 | Profile | Email Verification |
-|---------|---------|---------|---------|---------|---------|
-| <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.40.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.52.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.35.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.55.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.37.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.54.jpeg" width="200"/> |
+| Login | SignUp | Home Page 1 |
+|---------|---------|--------------|
+| <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.40.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.52.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.35.jpeg" width="200"/> |
+
+| Home Page 2 | Profile | Email Verification |
+|--------------|---------|---------------------|
+| <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.55.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.37.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.54.jpeg" width="200"/> |
+
 
 # Latest release 
 [Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/app-release.apk)
