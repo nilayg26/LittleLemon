@@ -1,9 +1,14 @@
 # LittleLemon🍋
 Capstone Project for [Meta](https://github.com/facebook) Android Developer Professional Certificate
 
-[Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.0/app-release.apk)
+# 📸 Some Screen shots
+| Login | SignUp | Home Page 1 | Home Page 2 | Profile | Email Verification |
+|---------|---------|---------|---------|---------|---------|
+| <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.40.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.52.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.35.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.55.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets37.37.jpeg" width="200"/> | <img src="https://nilayg26.github.io/Animation/LittleLemonAssets/LittleLemonAssets38.54.jpeg" width="200"/> |
 
-[Click to Download wireframe.jpg of the project](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.0/wireframe.jpg)
+# Latest release 
+[Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/app-release.apk)
+[Click to Download wireframe.jpg of the project](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/wireframe.jpg)
 
 Techstack: used various libraries & technologies such as for backend & database Ktor, Firebase's Cloud Firestore and OAuth credentials, Room library. For frontend I used the one and only Jetpack Compose. used MVVM architecture.
 
