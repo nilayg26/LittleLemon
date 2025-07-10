@@ -89,6 +89,7 @@ fun LogIn(
                     }
                 }
                 is Loading-> isLoading=true
+
                 is Error -> {context.createToastMessage("Credentials not found"); isLoading=false}
                 else -> isLoading=false
             }
