@@ -1,6 +1,12 @@
 # LittleLemon🍋
 Capstone Project for [Meta](https://github.com/facebook) Android Developer Professional Certificate
 
+## 🚀 How did I do it?
+
+- Implemented Email SignUp/Login with email verification and "Continue with Google" using `Firebase Authentication`.
+- Fetched data from `GitHub Pages` using `Ktor client` and stored it locally in ROM using `Room` and `SQLite`.
+
+
 # 📸 Some Screen shots
 | Login | SignUp | Home Page 1 |
 |---------|---------|--------------|
