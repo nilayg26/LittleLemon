@@ -19,7 +19,7 @@ used various libraries & technologies such as for backend & database `Ktor`, Fir
 
 
 # Latest release 
-[Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/app-release.apk)
-[Click to Download wireframe.jpg of the project](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/wireframe.jpg)
+- [Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/app-release.apk)
+- [Click to Download wireframe.jpg of the project](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/wireframe.jpg)
 
 
