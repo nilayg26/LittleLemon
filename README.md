@@ -5,7 +5,8 @@ Capstone Project for [Meta](https://github.com/facebook) Android Developer Profe
 
 - Implemented Email SignUp/Login with email verification and "Continue with Google" using `Firebase Authentication`.
 - Fetched data from `GitHub Pages` using `Ktor client` and stored it locally in ROM using `Room` and `SQLite`.
-
+## 🚀 What Major Technologies & Concepts I Used?  
+used various libraries & technologies such as for backend & database `Ktor`, Firebase's Cloud `Firestore` and `OAuth` credentials, `Room` library. For frontend I used the one and only `Jetpack Compose`. used `MVVM` architecture for robust Backend integration.
 
 # 📸 Some Screen shots
 | Login | SignUp | Home Page 1 |
@@ -21,5 +22,4 @@ Capstone Project for [Meta](https://github.com/facebook) Android Developer Profe
 [Click to Download Latest Version of LittleLemon App](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/app-release.apk)
 [Click to Download wireframe.jpg of the project](https://github.com/nilayg26/LittleLemon/releases/download/v1.0.1/wireframe.jpg)
 
-Techstack: used various libraries & technologies such as for backend & database Ktor, Firebase's Cloud Firestore and OAuth credentials, Room library. For frontend I used the one and only Jetpack Compose. used MVVM architecture.
 
