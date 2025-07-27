@@ -1,5 +1,10 @@
 # LittleLemon🍋
 Capstone Project for [Meta](https://github.com/facebook) Android Developer Professional Certificate
+<div align="center">
+  <img src="https://nilayg26.github.io/Animation/Certificates/MetaAndroidDev.jpg" alt="Certificate" width="800"/>
+</div>
+
+
 
 ## 🚀 How did I do it?
 
